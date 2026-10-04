@@ -1,4 +1,7 @@
-target/
+/target
+/vcpkg_installed
+.env
 .idea/
-audit_db/
-*.log
+/models/*.safetensors
+/models/*.engine
+/models/*.index

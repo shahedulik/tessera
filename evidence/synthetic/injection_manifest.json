@@ -1,0 +1,1695 @@
+{
+  "mission": "AURA-AUDIT Mission 1 / Task A",
+  "generator": "scripts/forge_synthetic_tenders.py",
+  "seed": 20260915,
+  "total_rows": 5000,
+  "baseline_rows": 4823,
+  "csv_sha256": "2fe27f0f06c362361a407c34df53b3fc3abe9534effcf3e7a78c01421e61a8a4",
+  "schema_note": "In ring rows (RING-*), owner_name carries the payee entity so the cycle company_name -> owner_name is expressible in the fixed 6-column schema. Loader rule: if owner_name matches a known company_name, emit TRANSFERRED_TO edge; else emit OWNED_BY.",
+  "injections": {
+    "circular_flow_rings": [
+      {
+        "ring_id": "RING-01",
+        "companies": [
+          "Meridian Axis Ltd",
+          "Basalt Logistics LLC",
+          "Cobalt Ridge Systems Inc"
+        ],
+        "week_monday": "2025-03-10",
+        "base_amount": 487320.0,
+        "district": "District 04"
+      },
+      {
+        "ring_id": "RING-02",
+        "companies": [
+          "Halcyon Drilling Co",
+          "Verdant Gate Holdings",
+          "Solace Marine Works Ltd"
+        ],
+        "week_monday": "2025-07-14",
+        "base_amount": 262845.0,
+        "district": "District 08"
+      },
+      {
+        "ring_id": "RING-03",
+        "companies": [
+          "Ironvale Construction Group",
+          "Peregrine Fuel Trading LLC",
+          "Northmoor Equipment Rental"
+        ],
+        "week_monday": "2025-11-03",
+        "base_amount": 731500.0,
+        "district": "District 06"
+      }
+    ],
+    "benford_clusters": [
+      {
+        "cluster_id": "BENFORD-C1",
+        "district": "District 07",
+        "year": 2025,
+        "month": 8,
+        "rows": 60
+      },
+      {
+        "cluster_id": "BENFORD-C2",
+        "district": "District 03",
+        "year": 2025,
+        "month": 12,
+        "rows": 60
+      }
+    ],
+    "alias_pairs": [
+      {
+        "alias_id": "ALIAS-01",
+        "variants": [
+          "Tongi Builders Ltd",
+          "Tongi Bldrs Limited"
+        ],
+        "owner": "Rafiqul Hasan",
+        "district": "District 05"
+      },
+      {
+        "alias_id": "ALIAS-02",
+        "variants": [
+          "Vanguard Steel Works Inc",
+          "Vanguard Steelworks"
+        ],
+        "owner": "Marek Duvall",
+        "district": "District 02"
+      },
+      {
+        "alias_id": "ALIAS-03",
+        "variants": [
+          "Bluecrest Marine Services LLC",
+          "Blue Crest Marine Serv."
+        ],
+        "owner": "Ingrid Sollas",
+        "district": "District 09"
+      },
+      {
+        "alias_id": "ALIAS-04",
+        "variants": [
+          "Golden Harvest Agro Co.",
+          "Golden Harvest Agricultural Company"
+        ],
+        "owner": "Tomas Ekstrom",
+        "district": "District 11"
+      }
+    ]
+  },
+  "injected_rows": [
+    {
+      "transaction_id": "TXN-000003",
+      "company_name": "Tongi Bldrs Limited",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "110129.21",
+      "date": "2025-08-05",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-000013",
+      "company_name": "Queensbury Commercial Consulting LLC",
+      "owner_name": "Fiona Eekhoff",
+      "amount_usd": "94083.88",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000061",
+      "company_name": "Vanguard Steel Works Inc",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "3775.74",
+      "date": "2025-12-12",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-000065",
+      "company_name": "Sandalwood Atlas Works Co",
+      "owner_name": "Dorian Skovgaard",
+      "amount_usd": "97826.74",
+      "date": "2025-12-19",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000071",
+      "company_name": "Redstone Commercial Enterprises Ltd",
+      "owner_name": "Damien Oberlin",
+      "amount_usd": "95551.16",
+      "date": "2025-08-02",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000078",
+      "company_name": "Vanguard Steelworks",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "220956.81",
+      "date": "2024-05-01",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-000084",
+      "company_name": "Blue Crest Marine Serv.",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "2808.70",
+      "date": "2025-09-11",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-000103",
+      "company_name": "Blue Crest Marine Serv.",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "897959.81",
+      "date": "2026-04-11",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-000122",
+      "company_name": "Blue Crest Marine Serv.",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "6557.30",
+      "date": "2025-05-21",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-000123",
+      "company_name": "Trevor Summit Partners Ltd",
+      "owner_name": "Yannick Ferreira",
+      "amount_usd": "90712.98",
+      "date": "2025-08-24",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000167",
+      "company_name": "Golden Harvest Agro Co.",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "875315.60",
+      "date": "2025-12-17",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-000192",
+      "company_name": "Norwood Highland Holdings PLC",
+      "owner_name": "Laurent Roth",
+      "amount_usd": "96687.98",
+      "date": "2025-12-26",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000208",
+      "company_name": "Vanguard Steel Works Inc",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "84527.51",
+      "date": "2025-06-28",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-000214",
+      "company_name": "Meridian Axis Ltd",
+      "owner_name": "Basalt Logistics LLC",
+      "amount_usd": "487320.00",
+      "date": "2025-03-10",
+      "district": "District 04",
+      "_inj": "RING-01"
+    },
+    {
+      "transaction_id": "TXN-000229",
+      "company_name": "Clarence Metro Infrastructure Ltd",
+      "owner_name": "Laura Graziani",
+      "amount_usd": "97274.81",
+      "date": "2025-12-26",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000252",
+      "company_name": "Vanguard Steel Works Inc",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "12759.78",
+      "date": "2024-03-30",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-000325",
+      "company_name": "Fairmont Reliance Holdings Ltd",
+      "owner_name": "Valentin Popescu",
+      "amount_usd": "90533.71",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000331",
+      "company_name": "Grantham Coastal Solutions Inc",
+      "owner_name": "Pavel Kirkpatrick",
+      "amount_usd": "91066.93",
+      "date": "2025-12-15",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000352",
+      "company_name": "Golden Harvest Agricultural Company",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "180522.64",
+      "date": "2025-10-28",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-000377",
+      "company_name": "Belmont Metro Infrastructure PLC",
+      "owner_name": "Miranda Kovacs",
+      "amount_usd": "97525.22",
+      "date": "2025-12-13",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000382",
+      "company_name": "Elmhurst Crestline Infrastructure Ltd",
+      "owner_name": "Samir Thomassen",
+      "amount_usd": "95899.04",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000481",
+      "company_name": "Thornbury Harbor Infrastructure Inc",
+      "owner_name": "Nikolai Wagner",
+      "amount_usd": "91395.86",
+      "date": "2025-12-16",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000510",
+      "company_name": "Bluecrest Marine Services LLC",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "304767.04",
+      "date": "2024-07-23",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-000589",
+      "company_name": "Tongi Bldrs Limited",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "25888.26",
+      "date": "2025-10-09",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-000616",
+      "company_name": "Golden Harvest Agro Co.",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "311715.35",
+      "date": "2026-05-19",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-000679",
+      "company_name": "Northgate Prime Services LLC",
+      "owner_name": "Nikolai Christensen",
+      "amount_usd": "94238.68",
+      "date": "2025-08-27",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000789",
+      "company_name": "Kirkwood Civic Infrastructure PLC",
+      "owner_name": "Jacqueline Laine",
+      "amount_usd": "95333.79",
+      "date": "2025-08-25",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000797",
+      "company_name": "Orchard Harbor Services PLC",
+      "owner_name": "Alena Sebesta",
+      "amount_usd": "97358.03",
+      "date": "2025-08-10",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000800",
+      "company_name": "Harlow Coastal Engineering PLC",
+      "owner_name": "Margaux Christensen",
+      "amount_usd": "94745.69",
+      "date": "2025-08-16",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000805",
+      "company_name": "Jessup Industrial Trading Co",
+      "owner_name": "Thibault Thiel",
+      "amount_usd": "93217.13",
+      "date": "2025-08-11",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-000853",
+      "company_name": "Jessup Apex Holdings PLC",
+      "owner_name": "Thibault Oberlin",
+      "amount_usd": "97715.33",
+      "date": "2025-12-23",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000867",
+      "company_name": "Yorkfield Pioneer Partners Co",
+      "owner_name": "Matteo Pelletier",
+      "amount_usd": "96275.47",
+      "date": "2025-12-13",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000887",
+      "company_name": "Tongi Builders Ltd",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "7944.51",
+      "date": "2024-06-18",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-000891",
+      "company_name": "Radcliffe Summit Logistics Co",
+      "owner_name": "Severin Marchetti",
+      "amount_usd": "94126.12",
+      "date": "2025-12-18",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000919",
+      "company_name": "Zephyr Metro Engineering Ltd",
+      "owner_name": "Rafaella Demirci",
+      "amount_usd": "96095.25",
+      "date": "2025-12-15",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-000970",
+      "company_name": "Bluecrest Marine Services LLC",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "6911.77",
+      "date": "2025-10-05",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-000990",
+      "company_name": "Devereux Civil Infrastructure LLC",
+      "owner_name": "Miranda Clemencic",
+      "amount_usd": "94667.02",
+      "date": "2025-08-26",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001013",
+      "company_name": "Vanguard Steelworks",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "3373.84",
+      "date": "2024-11-19",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-001077",
+      "company_name": "Dunmore Industrial Engineering Inc",
+      "owner_name": "Stefan Arnaud",
+      "amount_usd": "91666.13",
+      "date": "2025-12-04",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001095",
+      "company_name": "Elmhurst Summit Ventures Co",
+      "owner_name": "Pavel Jankowski",
+      "amount_usd": "90011.30",
+      "date": "2025-12-03",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001107",
+      "company_name": "Everly Prime Infrastructure Co",
+      "owner_name": "Vera Schneider",
+      "amount_usd": "91675.75",
+      "date": "2025-12-04",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001165",
+      "company_name": "Vernon Civic Group Inc",
+      "owner_name": "Felix Haugen",
+      "amount_usd": "96742.65",
+      "date": "2025-12-31",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001195",
+      "company_name": "Ashford Reliance Contractors Co",
+      "owner_name": "Fiona Oberlin",
+      "amount_usd": "98206.46",
+      "date": "2025-08-04",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001234",
+      "company_name": "Fairmont Civic Services Inc",
+      "owner_name": "Tatiana Iversen",
+      "amount_usd": "92410.51",
+      "date": "2025-12-04",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001275",
+      "company_name": "Belmont Highland Partners Co",
+      "owner_name": "Laura Oberlin",
+      "amount_usd": "91772.21",
+      "date": "2025-08-12",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001315",
+      "company_name": "Sandalwood Atlas Logistics PLC",
+      "owner_name": "Estelle Volkan",
+      "amount_usd": "98526.39",
+      "date": "2025-08-26",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001371",
+      "company_name": "Glenmore Crestline Services LLC",
+      "owner_name": "Petra Sauer",
+      "amount_usd": "93945.25",
+      "date": "2025-12-19",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001398",
+      "company_name": "Amberley Midland Enterprises Ltd",
+      "owner_name": "Antoine Pichler",
+      "amount_usd": "99600.87",
+      "date": "2025-08-11",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001435",
+      "company_name": "Inglewood Civic Works PLC",
+      "owner_name": "Wilhelm Braun",
+      "amount_usd": "97382.43",
+      "date": "2025-08-02",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001452",
+      "company_name": "Pinewood Harbor Partners Co",
+      "owner_name": "Yelena Lindqvist",
+      "amount_usd": "93857.70",
+      "date": "2025-08-23",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001483",
+      "company_name": "Redstone Pioneer Services Ltd",
+      "owner_name": "Greta Reyes",
+      "amount_usd": "93554.18",
+      "date": "2025-08-16",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001514",
+      "company_name": "Moorfield Crestline Works Ltd",
+      "owner_name": "Yelena Wallin",
+      "amount_usd": "95081.51",
+      "date": "2025-12-02",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001578",
+      "company_name": "Tongi Builders Ltd",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "348095.76",
+      "date": "2025-05-12",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-001604",
+      "company_name": "Vanguard Steel Works Inc",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "15138.27",
+      "date": "2025-06-17",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-001630",
+      "company_name": "Westbrook Sovereign Engineering LLC",
+      "owner_name": "Rene Schneider",
+      "amount_usd": "94825.84",
+      "date": "2025-08-01",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001633",
+      "company_name": "Northgate Civic Works Ltd",
+      "owner_name": "Yusuf Lorenz",
+      "amount_usd": "92176.80",
+      "date": "2025-12-05",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001651",
+      "company_name": "Blue Crest Marine Serv.",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "486278.86",
+      "date": "2025-02-24",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-001666",
+      "company_name": "Thornbury Pioneer Engineering PLC",
+      "owner_name": "Boris Scheffer",
+      "amount_usd": "96221.00",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001705",
+      "company_name": "Clarence Commercial Works Inc",
+      "owner_name": "Farida Silvestri",
+      "amount_usd": "95555.22",
+      "date": "2025-08-21",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001743",
+      "company_name": "Sandalwood Civil Trading Ltd",
+      "owner_name": "Hector Caruso",
+      "amount_usd": "93037.92",
+      "date": "2025-08-18",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001768",
+      "company_name": "Golden Harvest Agro Co.",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "24082.73",
+      "date": "2024-03-29",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-001780",
+      "company_name": "Vanguard Steel Works Inc",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "60151.42",
+      "date": "2025-01-12",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-001789",
+      "company_name": "Grantham Reliance Group Co",
+      "owner_name": "Hector Villanueva",
+      "amount_usd": "90282.44",
+      "date": "2025-08-24",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001832",
+      "company_name": "Orchard Civil Engineering Co",
+      "owner_name": "Halvard Sandberg",
+      "amount_usd": "93065.96",
+      "date": "2025-12-21",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001860",
+      "company_name": "Pinewood Prime Solutions Co",
+      "owner_name": "Pablo Christensen",
+      "amount_usd": "91039.07",
+      "date": "2025-08-19",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-001908",
+      "company_name": "Golden Harvest Agricultural Company",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "11555.75",
+      "date": "2026-08-05",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-001956",
+      "company_name": "Golden Harvest Agro Co.",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "48614.52",
+      "date": "2025-09-03",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-001967",
+      "company_name": "Peregrine Fuel Trading LLC",
+      "owner_name": "Northmoor Equipment Rental",
+      "amount_usd": "725893.15",
+      "date": "2025-11-05",
+      "district": "District 06",
+      "_inj": "RING-03"
+    },
+    {
+      "transaction_id": "TXN-001971",
+      "company_name": "Stonebridge Harbor Group LLC",
+      "owner_name": "Xenia Tarnowski",
+      "amount_usd": "94628.79",
+      "date": "2025-12-27",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-001989",
+      "company_name": "Tongi Builders Ltd",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "271818.28",
+      "date": "2024-09-27",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-002000",
+      "company_name": "Norwood Midland Developments PLC",
+      "owner_name": "Emeline Haugen",
+      "amount_usd": "91219.06",
+      "date": "2025-08-18",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002020",
+      "company_name": "Kingsmere Summit Logistics LLC",
+      "owner_name": "Valentin Capel",
+      "amount_usd": "94177.34",
+      "date": "2025-08-26",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002063",
+      "company_name": "Copperfield Civic Trading PLC",
+      "owner_name": "Lars Gauthier",
+      "amount_usd": "98307.98",
+      "date": "2025-08-04",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002068",
+      "company_name": "Westbrook Industrial Services Ltd",
+      "owner_name": "Laurent Blanchard",
+      "amount_usd": "94176.89",
+      "date": "2025-12-03",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002099",
+      "company_name": "Oakridge Lakeside Infrastructure LLC",
+      "owner_name": "Beatriz Bergstrom",
+      "amount_usd": "93229.75",
+      "date": "2025-12-28",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002109",
+      "company_name": "Blackwood Summit Partners PLC",
+      "owner_name": "Gabriel Demirci",
+      "amount_usd": "91501.14",
+      "date": "2025-08-07",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002141",
+      "company_name": "Eastvale Titan Logistics Ltd",
+      "owner_name": "Emeline Stark",
+      "amount_usd": "93974.42",
+      "date": "2025-08-06",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002162",
+      "company_name": "Eastvale Civic Works Ltd",
+      "owner_name": "Cecelia Clemencic",
+      "amount_usd": "93291.34",
+      "date": "2025-12-17",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002174",
+      "company_name": "Vanguard Steelworks",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "94686.89",
+      "date": "2024-04-06",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-002211",
+      "company_name": "Zephyr Industrial Services Inc",
+      "owner_name": "Adrian Kaufmann",
+      "amount_usd": "91903.12",
+      "date": "2025-08-03",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002212",
+      "company_name": "Dunmore Midland Consulting Ltd",
+      "owner_name": "Zara Vogel",
+      "amount_usd": "97432.34",
+      "date": "2025-12-11",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002216",
+      "company_name": "Jessup Titan Works Ltd",
+      "owner_name": "Delphine Haugen",
+      "amount_usd": "95897.88",
+      "date": "2025-12-08",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002223",
+      "company_name": "Bluecrest Marine Services LLC",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "19272.16",
+      "date": "2024-05-23",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-002240",
+      "company_name": "Dunmore Industrial Holdings PLC",
+      "owner_name": "Casper Dahlberg",
+      "amount_usd": "90202.12",
+      "date": "2025-12-11",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002262",
+      "company_name": "Belmont Coastal Developments LLC",
+      "owner_name": "Guillaume Reyes",
+      "amount_usd": "90127.00",
+      "date": "2025-08-24",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002271",
+      "company_name": "Northmoor Equipment Rental",
+      "owner_name": "Ironvale Construction Group",
+      "amount_usd": "722853.70",
+      "date": "2025-11-07",
+      "district": "District 06",
+      "_inj": "RING-03"
+    },
+    {
+      "transaction_id": "TXN-002283",
+      "company_name": "Larkspur Sovereign Group Ltd",
+      "owner_name": "Zoran Ursu",
+      "amount_usd": "91535.68",
+      "date": "2025-12-07",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002297",
+      "company_name": "Zephyr Summit Holdings Ltd",
+      "owner_name": "Jacqueline Jovanovic",
+      "amount_usd": "96155.78",
+      "date": "2025-08-20",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002361",
+      "company_name": "Tongi Builders Ltd",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "3320.59",
+      "date": "2024-02-04",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-002413",
+      "company_name": "Marlowe Metro Partners Ltd",
+      "owner_name": "Lucian Capel",
+      "amount_usd": "97495.16",
+      "date": "2025-08-27",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002424",
+      "company_name": "Belmont Harbor Trading Ltd",
+      "owner_name": "Hugo Christensen",
+      "amount_usd": "90182.66",
+      "date": "2025-08-12",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002436",
+      "company_name": "Bluecrest Marine Services LLC",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "437448.65",
+      "date": "2024-03-05",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-002443",
+      "company_name": "Fairmont Summit Group Co",
+      "owner_name": "Elena Georgiev",
+      "amount_usd": "94151.70",
+      "date": "2025-08-26",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002493",
+      "company_name": "Golden Harvest Agro Co.",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "29304.30",
+      "date": "2025-01-22",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-002522",
+      "company_name": "Everly Zenith Group LLC",
+      "owner_name": "Jacqueline Bauer",
+      "amount_usd": "98042.86",
+      "date": "2025-12-10",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002542",
+      "company_name": "Northgate Zenith Logistics Ltd",
+      "owner_name": "Matteo Rasmussen",
+      "amount_usd": "99338.52",
+      "date": "2025-12-17",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002553",
+      "company_name": "Tongi Bldrs Limited",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "7840.61",
+      "date": "2025-10-17",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-002638",
+      "company_name": "Amberley Crestline Consulting PLC",
+      "owner_name": "Florian Falkenstein",
+      "amount_usd": "94148.87",
+      "date": "2025-12-13",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002700",
+      "company_name": "Harlow Sovereign Developments Ltd",
+      "owner_name": "Lars Weiss",
+      "amount_usd": "95080.31",
+      "date": "2025-12-25",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002709",
+      "company_name": "Basalt Logistics LLC",
+      "owner_name": "Cobalt Ridge Systems Inc",
+      "amount_usd": "481932.89",
+      "date": "2025-03-12",
+      "district": "District 04",
+      "_inj": "RING-01"
+    },
+    {
+      "transaction_id": "TXN-002744",
+      "company_name": "Devereux Titan Group Co",
+      "owner_name": "Delphine Teodorescu",
+      "amount_usd": "95918.87",
+      "date": "2025-08-24",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-002764",
+      "company_name": "Larkspur Summit Services Inc",
+      "owner_name": "Beatriz Mikkelsen",
+      "amount_usd": "96833.15",
+      "date": "2025-12-16",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002821",
+      "company_name": "Grantham Sovereign Consulting Co",
+      "owner_name": "Aaron Ursu",
+      "amount_usd": "94635.64",
+      "date": "2025-12-07",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002824",
+      "company_name": "Golden Harvest Agricultural Company",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "75011.84",
+      "date": "2025-05-21",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-002842",
+      "company_name": "Brookfield Zenith Services Inc",
+      "owner_name": "Dorian Jovanovic",
+      "amount_usd": "96235.65",
+      "date": "2025-12-15",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002917",
+      "company_name": "Everly Metro Services LLC",
+      "owner_name": "Alena Gauthier",
+      "amount_usd": "91046.65",
+      "date": "2025-12-04",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-002918",
+      "company_name": "Ironvale Construction Group",
+      "owner_name": "Peregrine Fuel Trading LLC",
+      "amount_usd": "731500.00",
+      "date": "2025-11-03",
+      "district": "District 06",
+      "_inj": "RING-03"
+    },
+    {
+      "transaction_id": "TXN-002962",
+      "company_name": "Cobalt Ridge Systems Inc",
+      "owner_name": "Meridian Axis Ltd",
+      "amount_usd": "476287.88",
+      "date": "2025-03-14",
+      "district": "District 04",
+      "_inj": "RING-01"
+    },
+    {
+      "transaction_id": "TXN-003024",
+      "company_name": "Glenmore Apex Developments PLC",
+      "owner_name": "Farida Hartmann",
+      "amount_usd": "96358.83",
+      "date": "2025-08-08",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003069",
+      "company_name": "Langford Harbor Logistics LLC",
+      "owner_name": "Florian Rosqvist",
+      "amount_usd": "91668.75",
+      "date": "2025-08-27",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003096",
+      "company_name": "Aldergate Prime Services PLC",
+      "owner_name": "Julien Falkenstein",
+      "amount_usd": "92367.87",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003124",
+      "company_name": "Tongi Bldrs Limited",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "18498.20",
+      "date": "2024-11-30",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-003134",
+      "company_name": "Ullswater Crestline Group Inc",
+      "owner_name": "Yusuf Ferreira",
+      "amount_usd": "99179.89",
+      "date": "2025-12-30",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003142",
+      "company_name": "Radcliffe Zenith Trading LLC",
+      "owner_name": "Karina Fischer",
+      "amount_usd": "94732.66",
+      "date": "2025-12-07",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003180",
+      "company_name": "Inglewood Commercial Logistics Inc",
+      "owner_name": "Dorian Roth",
+      "amount_usd": "99468.86",
+      "date": "2025-08-16",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003183",
+      "company_name": "Grantham Industrial Group Co",
+      "owner_name": "Estelle Steffensen",
+      "amount_usd": "90495.84",
+      "date": "2025-12-17",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003221",
+      "company_name": "Cavendish Civil Services Inc",
+      "owner_name": "Beatriz Dietrich",
+      "amount_usd": "99369.90",
+      "date": "2025-08-31",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003266",
+      "company_name": "Blue Crest Marine Serv.",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "57796.70",
+      "date": "2025-06-04",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-003285",
+      "company_name": "Queensbury Midland Engineering PLC",
+      "owner_name": "Halvard Quaresma",
+      "amount_usd": "93731.52",
+      "date": "2025-08-09",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003309",
+      "company_name": "Cavendish Zenith Ventures Inc",
+      "owner_name": "Petra Corvin",
+      "amount_usd": "94007.83",
+      "date": "2025-12-17",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003371",
+      "company_name": "Norwood Coastal Infrastructure Ltd",
+      "owner_name": "Katarina Persson",
+      "amount_usd": "93455.44",
+      "date": "2025-12-28",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003390",
+      "company_name": "Pemberton Civic Ventures Ltd",
+      "owner_name": "Lena Kirkpatrick",
+      "amount_usd": "97112.35",
+      "date": "2025-08-26",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003427",
+      "company_name": "Vernon Reliance Partners Co",
+      "owner_name": "Valentin Haugen",
+      "amount_usd": "98696.45",
+      "date": "2025-12-22",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003461",
+      "company_name": "Ashford Highland Developments Co",
+      "owner_name": "Yusuf Steffensen",
+      "amount_usd": "90860.54",
+      "date": "2025-12-04",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003470",
+      "company_name": "Tongi Builders Ltd",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "4868.71",
+      "date": "2026-08-22",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-003471",
+      "company_name": "Everly Apex Infrastructure PLC",
+      "owner_name": "Rurik Hoffmann",
+      "amount_usd": "94849.61",
+      "date": "2025-08-13",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003530",
+      "company_name": "Northgate Titan Enterprises Inc",
+      "owner_name": "Guillaume Tarnowski",
+      "amount_usd": "91135.78",
+      "date": "2025-12-21",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003571",
+      "company_name": "Redstone Civic Partners Ltd",
+      "owner_name": "Tatiana Tarnowski",
+      "amount_usd": "92222.57",
+      "date": "2025-12-04",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003601",
+      "company_name": "Golden Harvest Agricultural Company",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "4294.23",
+      "date": "2026-04-27",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-003606",
+      "company_name": "Vanguard Steel Works Inc",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "7004.90",
+      "date": "2024-08-31",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-003630",
+      "company_name": "Vanguard Steelworks",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "247206.56",
+      "date": "2024-07-05",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-003696",
+      "company_name": "Bluecrest Marine Services LLC",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "271320.24",
+      "date": "2024-10-05",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-003702",
+      "company_name": "Wexford Pioneer Infrastructure PLC",
+      "owner_name": "Margaux Georgiev",
+      "amount_usd": "97646.01",
+      "date": "2025-08-08",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003712",
+      "company_name": "Aldergate Civic Trading PLC",
+      "owner_name": "Katarina Christensen",
+      "amount_usd": "98007.25",
+      "date": "2025-08-03",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003758",
+      "company_name": "Verdant Gate Holdings",
+      "owner_name": "Solace Marine Works Ltd",
+      "amount_usd": "259674.32",
+      "date": "2025-07-16",
+      "district": "District 08",
+      "_inj": "RING-02"
+    },
+    {
+      "transaction_id": "TXN-003773",
+      "company_name": "Grantham Atlas Engineering LLC",
+      "owner_name": "Lucia Rasmussen",
+      "amount_usd": "91366.10",
+      "date": "2025-08-06",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003830",
+      "company_name": "Brookfield Commercial Trading Inc",
+      "owner_name": "Aaron Tolvanen",
+      "amount_usd": "94146.22",
+      "date": "2025-12-19",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003873",
+      "company_name": "Golden Harvest Agro Co.",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "109713.23",
+      "date": "2024-11-21",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-003918",
+      "company_name": "Thornbury Industrial Services Ltd",
+      "owner_name": "Enzo Graziani",
+      "amount_usd": "98017.26",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-003928",
+      "company_name": "Copperfield Atlas Services Inc",
+      "owner_name": "Rene Tarnowski",
+      "amount_usd": "95754.66",
+      "date": "2025-08-31",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-003989",
+      "company_name": "Orchard Crestline Solutions Ltd",
+      "owner_name": "Tadeusz Moreau",
+      "amount_usd": "96736.24",
+      "date": "2025-12-08",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004000",
+      "company_name": "Fenwick Zenith Enterprises Inc",
+      "owner_name": "Stefan Vasquez",
+      "amount_usd": "91123.08",
+      "date": "2025-12-23",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004047",
+      "company_name": "Vanguard Steelworks",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "5491.83",
+      "date": "2024-03-09",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-004065",
+      "company_name": "Solace Marine Works Ltd",
+      "owner_name": "Halcyon Drilling Co",
+      "amount_usd": "258342.35",
+      "date": "2025-07-18",
+      "district": "District 08",
+      "_inj": "RING-02"
+    },
+    {
+      "transaction_id": "TXN-004071",
+      "company_name": "Zephyr Highland Services LLC",
+      "owner_name": "Zoran Zajac",
+      "amount_usd": "96732.24",
+      "date": "2025-12-23",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004080",
+      "company_name": "Vernon Zenith Contractors Co",
+      "owner_name": "Sabine Gauthier",
+      "amount_usd": "92631.28",
+      "date": "2025-12-24",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004098",
+      "company_name": "Golden Harvest Agricultural Company",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "59683.22",
+      "date": "2026-04-08",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-004127",
+      "company_name": "Everly Harbor Works Co",
+      "owner_name": "Thibault Graziani",
+      "amount_usd": "93358.26",
+      "date": "2025-08-16",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004153",
+      "company_name": "Golden Harvest Agricultural Company",
+      "owner_name": "Tomas Ekstrom",
+      "amount_usd": "7966.45",
+      "date": "2025-08-13",
+      "district": "District 11",
+      "_inj": "ALIAS-04"
+    },
+    {
+      "transaction_id": "TXN-004238",
+      "company_name": "Oakridge Midland Group Ltd",
+      "owner_name": "Lucian Skovgaard",
+      "amount_usd": "92635.55",
+      "date": "2025-08-29",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004240",
+      "company_name": "Queensbury Crestline Solutions Inc",
+      "owner_name": "Samir Girard",
+      "amount_usd": "96493.89",
+      "date": "2025-12-09",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004271",
+      "company_name": "Blue Crest Marine Serv.",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "32689.85",
+      "date": "2024-05-09",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-004279",
+      "company_name": "Devereux Highland Contractors Ltd",
+      "owner_name": "Tadeusz Garrido",
+      "amount_usd": "97086.71",
+      "date": "2025-08-13",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004300",
+      "company_name": "Amberley Atlas Ventures Co",
+      "owner_name": "Ilse Kovacs",
+      "amount_usd": "98473.97",
+      "date": "2025-08-23",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004304",
+      "company_name": "Tongi Bldrs Limited",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "222791.40",
+      "date": "2024-09-10",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-004327",
+      "company_name": "Ullswater Metro Enterprises LLC",
+      "owner_name": "Beatriz Lorenz",
+      "amount_usd": "99429.17",
+      "date": "2025-08-14",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004331",
+      "company_name": "Halcyon Drilling Co",
+      "owner_name": "Verdant Gate Holdings",
+      "amount_usd": "262845.00",
+      "date": "2025-07-14",
+      "district": "District 08",
+      "_inj": "RING-02"
+    },
+    {
+      "transaction_id": "TXN-004343",
+      "company_name": "Kirkwood Industrial Developments PLC",
+      "owner_name": "Margaux Scheffer",
+      "amount_usd": "99544.04",
+      "date": "2025-08-02",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004345",
+      "company_name": "Yorkfield Highland Engineering Co",
+      "owner_name": "Nadia Fischer",
+      "amount_usd": "91352.30",
+      "date": "2025-08-27",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004355",
+      "company_name": "Vanguard Steelworks",
+      "owner_name": "Marek Duvall",
+      "amount_usd": "18620.26",
+      "date": "2026-08-14",
+      "district": "District 02",
+      "_inj": "ALIAS-02"
+    },
+    {
+      "transaction_id": "TXN-004362",
+      "company_name": "Tongi Bldrs Limited",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "142760.97",
+      "date": "2024-03-02",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-004375",
+      "company_name": "Bluecrest Marine Services LLC",
+      "owner_name": "Ingrid Sollas",
+      "amount_usd": "855871.63",
+      "date": "2024-01-02",
+      "district": "District 09",
+      "_inj": "ALIAS-03"
+    },
+    {
+      "transaction_id": "TXN-004378",
+      "company_name": "Pinewood Prime Enterprises LLC",
+      "owner_name": "Rene Kovacs",
+      "amount_usd": "95309.81",
+      "date": "2025-08-14",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004401",
+      "company_name": "Moorfield Pioneer Works LLC",
+      "owner_name": "Greta Slavik",
+      "amount_usd": "90744.28",
+      "date": "2025-08-05",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004403",
+      "company_name": "Yorkfield Industrial Holdings Ltd",
+      "owner_name": "Damien Novak",
+      "amount_usd": "90254.35",
+      "date": "2025-08-07",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004424",
+      "company_name": "Elmhurst Lakeside Logistics Inc",
+      "owner_name": "Dorian Hartmann",
+      "amount_usd": "91096.45",
+      "date": "2025-08-26",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004439",
+      "company_name": "Blackwood Lakeside Group LLC",
+      "owner_name": "Miranda Szabo",
+      "amount_usd": "97163.49",
+      "date": "2025-08-10",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004537",
+      "company_name": "Grantham Prime Developments Inc",
+      "owner_name": "Elena Delacroix",
+      "amount_usd": "90101.04",
+      "date": "2025-08-11",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004538",
+      "company_name": "Langford Titan Contractors Ltd",
+      "owner_name": "Viktor Garrido",
+      "amount_usd": "93931.83",
+      "date": "2025-12-23",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004575",
+      "company_name": "Radcliffe Harbor Services PLC",
+      "owner_name": "Rasmus Girard",
+      "amount_usd": "95504.91",
+      "date": "2025-08-14",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004578",
+      "company_name": "Norwood Crestline Partners LLC",
+      "owner_name": "Boris Hartmann",
+      "amount_usd": "91707.44",
+      "date": "2025-08-28",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004622",
+      "company_name": "Tongi Builders Ltd",
+      "owner_name": "Rafiqul Hasan",
+      "amount_usd": "657494.55",
+      "date": "2026-02-07",
+      "district": "District 05",
+      "_inj": "ALIAS-01"
+    },
+    {
+      "transaction_id": "TXN-004669",
+      "company_name": "Eastvale Metro Solutions Inc",
+      "owner_name": "Hanna Andersson",
+      "amount_usd": "93855.19",
+      "date": "2025-12-27",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004698",
+      "company_name": "Orchard Crestline Solutions PLC",
+      "owner_name": "Conrad Garrido",
+      "amount_usd": "93150.69",
+      "date": "2025-08-18",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004844",
+      "company_name": "Orchard Civil Group Co",
+      "owner_name": "Aaron Halvorsen",
+      "amount_usd": "92241.15",
+      "date": "2025-12-13",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    },
+    {
+      "transaction_id": "TXN-004885",
+      "company_name": "Marlowe Zenith Logistics LLC",
+      "owner_name": "Elias Lindqvist",
+      "amount_usd": "97599.00",
+      "date": "2025-08-16",
+      "district": "District 07",
+      "_inj": "BENFORD-C1"
+    },
+    {
+      "transaction_id": "TXN-004908",
+      "company_name": "Ullswater Coastal Works PLC",
+      "owner_name": "Miranda Hartmann",
+      "amount_usd": "91462.42",
+      "date": "2025-12-03",
+      "district": "District 03",
+      "_inj": "BENFORD-C2"
+    }
+  ]
+}

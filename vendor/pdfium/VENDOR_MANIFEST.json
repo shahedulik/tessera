@@ -1,0 +1,13 @@
+{
+  "component": "pdfium.dll (Windows x64, non-V8 build)",
+  "source": "https://github.com/bblanchon/pdfium-binaries/releases/tag/chromium%2F6996",
+  "asset": "pdfium-win-x64.tgz",
+  "abi_pin": "pdfium-render 0.8.28 -> feature pdfium_latest -> pdfium_6996 (exact ABI match)",
+  "sha256": "6a6b908642f482a9f5703e2b77ef3de18a97279fd8240573b626268ab51ce0f9",
+  "size_bytes": 5575168,
+  "license": "BSD-3-Clause (PDFium); build scripts Apache-2.0 (see LICENSE)",
+  "deployment_rule": "crates/tessera_core/build.rs stages this DLL beside tessera_core.exe on every cargo build; VisionEngine binds './pdfium.dll' first, then falls back to system PATH (Transfer Doc Section 3 placement rule).",
+  "deviation": "DEV-07: official vcpkg registry has no pdfium port (404 verified on microsoft/vcpkg master, 2026-09-15). vcpkg.json remains the Phase-3 manifest for duckdb/kuzu/openssl.",
+  "windows_verification": "Get-FileHash D:\\tessera\\vendor\\pdfium\\pdfium.dll -Algorithm SHA256",
+  "verified_utc": "2026-09-15"
+}

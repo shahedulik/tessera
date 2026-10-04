@@ -1,0 +1,22 @@
+[package]
+name = "tessera_core"
+version = "13.1.0"
+edition = "2024"
+
+[features]
+default = []
+db = ["dep:duckdb", "dep:kuzu"]
+
+[dependencies]
+core_affinity = { workspace = true }
+tokio = { workspace = true }
+arrow = { workspace = true }
+libm = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+duckdb = { workspace = true, optional = true }
+kuzu = { workspace = true, optional = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
+core_affinity = { workspace = true }

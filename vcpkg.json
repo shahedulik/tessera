@@ -1,0 +1,6 @@
+{
+  "name": "tessera",
+  "version": "13.1.0",
+  "description": "TESSERA native dependency manifest (Windows MSVC, triplet x64-windows). EVIDENCE-BASED DEVIATIONS: [pdfium] no port in official vcpkg registry (404 verified) - vendored ABI-pinned DLL at vendor/pdfium (bblanchon chromium/6996, matches pdfium-render =0.8.37 + feature pdfium_6996), staged beside exe by crates/tessera_core/build.rs. [kuzu] no port in official vcpkg registry (404 verified) - official prebuilt libkuzu v0.11.3 provisioned to D:/tessera-cache/kuzu via KUZU_LIBRARY_DIR/KUZU_INCLUDE_DIR/KUZU_SHARED env contract of the kuzu crate build.rs. [duckdb] port exists (1.4.4) but ABI-drifts from crate pin (1.5.5 download-pin exposed) - crate 'bundled' feature compiles version-matched static DuckDB instead. [arrow] arrow-rs is pure Rust with built-in C Data Interface FFI - C++ arrow port not consumed. Phase 3: real vcpkg consumers (e.g. openssl) are added here TOGETHER with paired build.rs link scripts per Graveyard #8; crates/tessera_core/build.rs auto-provisions with explicit D:-routing flags (buildtrees/downloads/packages -> D:/tessera-cache/vcpkg) when this list becomes non-empty, then baseline via 'vcpkg x-update-baseline --add-initial-baseline'.",
+  "dependencies": []
+}
