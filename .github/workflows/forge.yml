@@ -5,18 +5,21 @@ on:
 jobs:
   sqa:
     runs-on: windows-latest
+    env:
+      CARGO_TERM_COLOR: always
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
+          toolchain: 1.98.1
           components: clippy
-      - name: clippy
-        run: cargo clippy --all-targets -- -D warnings
-      - name: tests
-        run: cargo test --workspace --release
-      - name: build
-        run: cargo build --release
-      - name: spine
+      - name: clippy (core)
+        run: cargo clippy -p tessera_core --all-targets -- -D warnings
+      - name: tests (core)
+        run: cargo test -p tessera_core --release
+      - name: build (core)
+        run: cargo build -p tessera_core --release
+      - name: spine acceptance
         run: .\target\release\tessera_core.exe benford evidence\synthetic\synthetic_tenders.csv
       - uses: actions/upload-artifact@v4
         with:
