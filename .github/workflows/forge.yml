@@ -1,0 +1,24 @@
+name: forge
+on:
+  push:
+    branches: [main]
+jobs:
+  sqa:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          components: clippy
+      - name: clippy
+        run: cargo clippy --all-targets -- -D warnings
+      - name: tests
+        run: cargo test --workspace --release
+      - name: build
+        run: cargo build --release
+      - name: spine
+        run: .\target\release\tessera_core.exe benford evidence\synthetic\synthetic_tenders.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tessera_core-windows-x64
+          path: target/release/tessera_core.exe
