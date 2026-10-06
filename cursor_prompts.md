@@ -13,12 +13,14 @@
 - Outcome: TESSERA v13.1 skeleton; benford.rs spine with acceptance chi2=199.733±0.01, p=7.274221e-39, FLAG lines; sqa_benford.rs + sqa_pools.rs; gauntlet; DEV-10..15 pins carried (candle 0.11/cudarc 0.19.x, arrow 58, duckdb bundled 1.10505.0, kuzu 0.11.3 prebuilt default-features=false, cxx/cxx-build =1.0.138, pdfium ABI-6996 vendored).
 - Gate: sqa_gauntlet.ps1 -> 6/6 PASS.
 
-## P1-002 — DuckDB ingestion of sealed fixture
+## P1-002 — DuckDB ingestion of sealed fixture (EXECUTED + ACCEPTED in Lead Architect forge)
+- Outcome: crates/tessera_core/src/ingest.rs + tests/sqa_ingest.rs. Accepted: custody PASS, rows=5000, duckdb v1.5.5 count(*)=5000, chi2=199.733 p=7.274221e-39 reproduced in-pipeline, 5/5 tests incl. 10k-case malformed-rows fuzz, clippy clean.
 - Prompt: "Per .cursorrules: in crates/tessera_core behind feature `db`, add ingestion.rs that reads D:\tessera\evidence\synthetic\synthetic_tenders.csv via benford::parse_csv_bytes (Arrow RecordBatch, zero re-parse), verifies the SHA-256 seal 2fe27f0f... at ingestion, then bulk-inserts into in-memory DuckDB table `tenders` using the duckdb Appender API. CLI: `tessera_core.exe ingest`. Log rows=5000 and the seal hash. Ship with SQA (a)-(d): proptest fuzz over malformed batch inputs (10k cases, zero panics), fixture hash gate test, clippy clean."
 - Expected: `INGEST | rows=5000 | sha256=2fe27f0f...` then DuckDB `SELECT count(*) FROM tenders` = 5000.
 - Gate: gauntlet PASS + acceptance numbers above.
 
-## P1-003 — Kuzu bipartite graph + Circular Flow template
+## P1-003 — Kuzu bipartite graph + Circular Flow template (EXECUTED + ACCEPTED in Lead Architect forge)
+- Outcome: crates/tessera_core/src/graph.rs + tests/sqa_graph.rs. Accepted: schema 4 node + 4 rel tables; loaded companies=4960 persons=4947 tenders=5000 OWNED_BY=4951 BID_ON=5000 TRANSFERRED_TO=9 SHARES_ADDRESS=4; rings detected=3 expected=3 (RING-01/02/03 exact, tx sets + spans verified, negative test: hop removal -> 2 rings); 5/5 tests incl. 10k escape-roundtrip fuzz; clippy clean.
 - Prompt: "Per .cursorrules: add graph.rs behind feature `db`. Kuzu schema: nodes Person(name PK), Company(name PK), Tender(id PK, amount DOUBLE, date DATE, district STRING); rels OWNED_BY(Company->Person), BID_ON(Company->Tender), TRANSFERRED_TO(Company->Company, amount DOUBLE, date DATE). Load from DuckDB `tenders` via Arrow C Data Interface (zero-copy). Loader rule from evidence/synthetic/injection_manifest.json: owner_name matching a known company_name emits TRANSFERRED_TO; else OWNED_BY + BID_ON. Implement pre-compiled Circular Flow template: MATCH (a:Company)-[:TRANSFERRED_TO]->(b:Company)-[:TRANSFERRED_TO]->(c:Company)-[:TRANSFERRED_TO]->(a) WHERE all three hops within 7 days. Ship with SQA (a)-(d)."
 - Expected: exactly 3 cycles (RING-01/02/03 ground truth); ring amounts decay 0.4-1.5%/hop.
 - Gate: gauntlet PASS + cycle count == 3.

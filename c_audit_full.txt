@@ -1,0 +1,203 @@
+37.63	C:\Windows
+34.11	C:\Users
+26.05	C:\Program Files
+25.54	C:\Users\Shahedul Islam\AppData
+14.19	C:\Program Files (x86)
+13.53	C:\Users\Shahedul Islam\AppData\Local\Packages
+12.45	C:\Program Files\WindowsApps
+11.72	C:\Windows\WinSxS
+6.65	C:\Program Files (x86)\Microsoft
+6.11	C:\ProgramData
+5.3	C:\Windows\Installer
+4.97	C:\Users\Shahedul Islam\.vscode
+4.06	C:\Program Files\Microsoft Office
+3.79	C:\Program Files\NVIDIA Corporation
+3.47	C:\Program Files (x86)\Microsoft Visual Studio
+2.77	C:\ProgramData\Microsoft
+2.69	C:\Users\Shahedul Islam\AppData\Local\Google
+2.57	C:\Users\Shahedul Islam\AppData\Roaming\Code
+2.16	C:\Users\Shahedul Islam\AppData\Local\Microsoft
+1.97	C:\Users\Shahedul Islam\.cache
+1.68	C:\Program Files (x86)\Windows Kits
+1.14	C:\Program Files\Epic Games
+1.05	C:\ProgramData\AMD
+1.04	C:\Program Files\BraveSoftware
+0.94	C:\Program Files\AMD
+0.94	C:\Users\Shahedul Islam\AppData\Local\Programs
+0.85	C:\Program Files\HP
+0.8	C:\ProgramData\Blackmagic Design
+0.79	C:\Program Files (x86)\Epic Games
+0.77	C:\Users\Shahedul Islam\AppData\Roaming\Zoom
+0.68	C:\ProgramData\NVIDIA
+0.68	C:\Users\Shahedul Islam\AppData\Local\npm-cache
+0.65	C:\Users\Shahedul Islam\CrossDevice
+0.64	C:\Users\Shahedul Islam\AppData\Local\BraveSoftware
+0.63	C:\Users\Shahedul Islam\AppData\Local\OpenAI
+0.62	C:\Users\Shahedul Islam\.codex
+0.6	C:\Program Files (x86)\Blackmagic Design
+0.56	C:\Program Files\Microsoft OneDrive
+0.53	C:\Program Files (x86)\Google
+0.5	C:\Program Files\Google
+0.46	C:\ProgramData\Package Cache
+0.4	C:\Program Files\Git
+0.29	C:\NVIDIA
+0.2	C:\Program Files (x86)\NVIDIA Corporation
+0.17	C:\Users\Shahedul Islam\Desktop
+0.17	C:\AMD
+0.16	C:\Users\Shahedul Islam\AppData\Roaming\Cursor
+0.14	C:\Program Files\Common Files
+0.13	C:\Program Files (x86)\AMD
+0.12	C:\Users\Shahedul Islam\AppData\Local\NVIDIA Corporation
+0.11	C:\Users\Shahedul Islam\AppData\Local\Zoom
+0.1	C:\Program Files\nodejs
+0.1	C:\ProgramData\NVIDIA Corporation
+0.09	C:\ProgramData\USOShared
+0.09	C:\Users\Shahedul Islam\AppData\Local\NVIDIA
+0.08	C:\ProgramData\Epic
+0.08	C:\Users\Shahedul Islam\AppData\Local\JetBrains
+0.07	C:\Users\Shahedul Islam\Documents
+0.07	C:\Users\Shahedul Islam\AppData\Local\Epic Games
+0.06	C:\Users\Shahedul Islam\AppData\Local\CrashDumps
+0.06	C:\Users\Shahedul Islam\.local
+0.05	C:\Program Files\Windows Defender
+0.05	C:\Windows\SoftwareDistribution
+0.05	C:\Users\Shahedul Islam\AppData\Local\AMD
+0.04	C:\ProgramData\USOPrivate
+0.04	C:\Users\Shahedul Islam\AppData\Local\Comms
+0.04	C:\Users\Shahedul Islam\AppData\Roaming\Microsoft
+0.03	C:\Program Files (x86)\PeaZip
+0.03	C:\ProgramData\Whesvc
+0.03	C:\Program Files (x86)\Common Files
+0.02	C:\Users\Shahedul Islam\Pictures
+0.02	C:\Program Files (x86)\Microsoft SDKs
+0.02	C:\ProgramData\HP
+0.02	C:\Users\Shahedul Islam\OneDrive
+0.02	C:\Program Files (x86)\BraveSoftware
+0.01	C:\Program Files\WinRAR
+0.01	C:\Program Files (x86)\Windows Photo Viewer
+0.01	C:\Users\Shahedul Islam\AppData\Local\Publishers
+0.01	C:\Program Files\WSL
+0.01	C:\Users\Shahedul Islam\AppData\Local\Temp
+0.01	C:\Program Files (x86)\Reference Assemblies
+0.01	C:\$SysReset
+0.01	C:\Program Files (x86)\Microsoft.NET
+0.01	C:\Program Files\Windows Photo Viewer
+0.01	C:\Program Files\Microsoft Office 15
+0	C:\Users\Shahedul Islam\AppData\Roaming\WinRAR
+0	C:\Users\Shahedul Islam\AppData\Local\DaVinci Resolve Welcome
+0	C:\Users\Shahedul Islam\AppData\Roaming\Synaptics
+0	C:\Users\Shahedul Islam\Music
+0	C:\ProgramData\NVIDIA GPU Computing Toolkit
+0	C:\Users\Shahedul Islam\AppData\Local\Downloaded Installations
+0	C:\ProgramData\Propagation
+0	C:\Users\Shahedul Islam\NetHood
+0	C:\ProgramData\SoftwareDistribution
+0	C:\Users\Shahedul Islam\AppData\Local\Backup
+0	C:\ProgramData\Claude
+0	C:\$Recycle.Bin
+0	C:\Users\Shahedul Islam\AppData\Local\Cursor
+0	C:\Users\Shahedul Islam\AppData\Local\AMD_Common
+0	C:\SYSTEM.SAV
+0	C:\Program Files (x86)\MSBuild
+0	C:\Program Files\Uninstall Information
+0	C:\ProgramData\Microsoft DevDiv
+0	C:\ProgramData\Desktop
+0	C:\Users\Shahedul Islam\AppData\Local\firebase-heartbeat
+0	C:\Users\Shahedul Islam\SendTo
+0	C:\Program Files\WindowsPowerShell
+0	C:\Users\Shahedul Islam\AppData\Local\OGH
+0	C:\Users\Shahedul Islam\AppData\Local\History
+0	C:\Users\Shahedul Islam\AppData\Local\CEF
+0	C:\Users\Shahedul Islam\Videos
+0	C:\Users\Shahedul Islam\AppData\Local\ConnectedDevicesPlatform
+0	C:\Windows\Temp
+0	C:\Program Files\Application Verifier
+0	C:\Program Files (x86)\Windows Media Player
+0	C:\Users\Shahedul Islam\.cursor
+0	C:\ProgramData\regid.1991-06.com.microsoft
+0	C:\Downloads
+0	C:\Users\Shahedul Islam\.config
+0	C:\Users\Shahedul Islam\AppData\Local\Live++
+0	C:\Users\Shahedul Islam\AppData\Local\Temporary Internet Files
+0	C:\Users\Shahedul Islam\AppData\Local\HPOmenServices
+0	C:\Users\Shahedul Islam\Local Settings
+0	C:\ProgramData\EpicInstallerTemp
+0	C:\System Volume Information
+0	C:\Program Files (x86)\Application Verifier
+0	C:\ProgramData\Start Menu
+0	C:\Users\Shahedul Islam\.copilot
+0	C:\Documents and Settings
+0	C:\Users\Shahedul Islam\AppData\Local\Claude-Data
+0	C:\Program Files\JetBrains
+0	C:\Users\Shahedul Islam\AppData\Local\UnrealEngine
+0	C:\Users\Shahedul Islam\DaVinci Resolve Media
+0	C:\ProgramData\Microsoft OneDrive
+0	C:\Users\Shahedul Islam\ansel
+0	C:\.cache
+0	C:\ProgramData\Packages
+0	C:\Users\Shahedul Islam\Links
+0	C:\Users\Shahedul Islam\Application Data
+0	C:\Users\Shahedul Islam\AppData\Local\AMDSoftwareInstaller
+0	C:\Users\Shahedul Islam\AppData\Roaming\Zadarma
+0	C:\Program Files\Windows Media Player
+0	C:\Users\Shahedul Islam\Contacts
+0	C:\Program Files\NVIDIA GPU Computing Toolkit
+0	C:\Users\Shahedul Islam\Searches
+0	C:\Users\Shahedul Islam\AppData\Local\Package Cache
+0	C:\Users\Shahedul Islam\AppData\Local\vcpkg
+0	C:\Program Files (x86)\WindowsPowerShell
+0	C:\ProgramData\dbg
+0	C:\Users\Shahedul Islam\AppData\Local\UnrealEngineLauncher
+0	C:\Users\Shahedul Islam\AppData\Local\ToastNotificationManagerCompat
+0	C:\Users\Shahedul Islam\Templates
+0	C:\Users\Shahedul Islam\.vscode-shared
+0	C:\ProgramData\Documents
+0	C:\Users\Shahedul Islam\AppData\Local\OneDrive
+0	C:\Users\Shahedul Islam\Start Menu
+0	C:\Program Files (x86)\Windows Sidebar
+0	C:\Users\Shahedul Islam\AppData\Local\uv
+0	C:\Program Files (x86)\Windows Mail
+0	C:\ProgramData\Application Data
+0	C:\Users\Shahedul Islam\AppData\Roaming\Visual Studio Setup
+0	C:\Program Files (x86)\Internet Explorer
+0	C:\inetpub
+0	C:\Users\Shahedul Islam\AppData\Local\VirtualStore
+0	C:\Users\Shahedul Islam\AppData\Local\DBG
+0	C:\Users\Shahedul Islam\AppData\Local\EpicGamesLauncher
+0	C:\ProgramData\boost_interprocess
+0	C:\OneDriveTemp
+0	C:\Users\Shahedul Islam\AppData\Local\cache
+0	C:\Users\Shahedul Islam\AppData\Local\Claude-3p
+0	C:\Recovery
+0	C:\PerfLogs
+0	C:\Users\Shahedul Islam\.claude-server-commander
+0	C:\Program Files (x86)\Windows Defender
+0	C:\Users\Shahedul Islam\PrintHood
+0	C:\Program Files\Internet Explorer
+0	C:\Users\Shahedul Islam\AppData\Local\Claude
+0	C:\Users\Shahedul Islam\AppData\Roaming\NVIDIA
+0	C:\Users\Shahedul Islam\AppData\Roaming\VoiceAccess
+0	C:\Users\Shahedul Islam\Downloads
+0	C:\Users\Shahedul Islam\AppData\Local\PlaceholderTileLogoFolder
+0	C:\ProgramData\Realtek
+0	C:\Users\Shahedul Islam\Favorites
+0	C:\Users\Shahedul Islam\Cookies
+0	C:\Program Files\Windows Sidebar
+0	C:\Program Files (x86)\Windows NT
+0	C:\Users\Shahedul Islam\AppData\Local\speech
+0	C:\Program Files\Windows Mail
+0	C:\Users\Shahedul Islam\AppData\Roaming\Adobe
+0	C:\ProgramData\Templates
+0	C:\Users\Shahedul Islam\Recent
+0	C:\Users\Shahedul Islam\AppData\Local\D3DSCache
+0	C:\Users\Shahedul Islam\AppData\Local\AWSToolkit
+0	C:\Program Files\Windows NT
+0	C:\Program Files\Blackmagic Design
+0	C:\ProgramData\ssh
+0	C:\Program Files\ModifiableWindowsApps
+0	C:\Users\Shahedul Islam\Saved Games
+0	C:\Users\Shahedul Islam\My Documents
+0	C:\ProgramData\Windows App Certification Kit
+0	C:\Users\Shahedul Islam\AppData\Local\CrashReportClient
+0	C:\Users\Shahedul Islam\.claude
+0	C:\Users\Shahedul Islam\AppData\Local\Application Data

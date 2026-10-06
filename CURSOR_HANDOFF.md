@@ -122,8 +122,8 @@ GATE 4e: BRAIN lines: `DuckDB OLAP engine online | version v1.5.5` and `Kuzu gra
 
 ## 5. ORDERED COMPOSER PROMPTS (one per module — full text in cursor_prompts.md)
 Execute strictly in order; after EACH module run the gauntlet (§6) and commit only on full PASS:
-1. P1-002 DuckDB ingestion of the sealed fixture (feature `db`).
-2. P1-003 Kuzu bipartite graph + Circular Flow template (must return exactly RING-01/02/03).
+1. P1-002 DuckDB ingestion of the sealed fixture (feature `db`). — DONE (forge-accepted; on Fortress: regression via scripts\sqa_db.ps1)
+2. P1-003 Kuzu bipartite graph + Circular Flow template (must return exactly RING-01/02/03). — DONE (forge-accepted; regression via scripts\sqa_db.ps1)
 3. P1-004 Alias resolution Super-Node collapse (ground truth: 4 pairs).
 4. P1-005 Vision rasterization gate (pdfium proof on a sealed fixture PDF).
 5. P2-001 LOCAL FORGE quantization (Qwen2-VL-2B INT4/AWQ-class → D:\tessera\models, envelope-probed).
@@ -138,6 +138,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File D:\tessera\scripts\sqa_gaunt
 ```
 
 Runs in order: clippy (-D warnings, all-targets, all-features) → cargo test (unit+integration) → proptest fuzz (10k cases) → hash gates (fixture seal + full pack manifest) → benford runtime acceptance. GATE 6: final line `GAUNTLET: PASS (5 of 5). SQA mandate satisfied.` and exit code 0 (`echo $LASTEXITCODE`).
+
+DB acceptance runner (P1-002 + P1-003 — both EXECUTED and forge-accepted; re-run any time as regression proof):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File D:\tessera\scripts\sqa_db.ps1
+```
+
+GATE 6b: `SQA-DB: PASS (6 of 6). P1-002 + P1-003 accepted.` Expected rings output: RING-01/02/03 with week_of 2025-03-10 / 2025-07-14 / 2025-11-03, span=4d each, `detected=3 expected=3 window=7d verdict=PASS`. First `--features db` build compiles the bundled DuckDB amalgamation once (15-35 min, console looks frozen — do not cancel).
 
 ## 7. TROUBLESHOOTING QUICK TABLE
 | Symptom | First move |

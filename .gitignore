@@ -5,3 +5,7 @@
 /models/*.safetensors
 /models/*.engine
 /models/*.index
+builds/
+gauntlet_log.txt
+tessera-stage/
+*.log
