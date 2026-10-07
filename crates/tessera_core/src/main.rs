@@ -52,6 +52,21 @@ fn run_pdfscan(args: &[String]) -> i32 {
     }
 }
 
+fn run_anomaly(args: &[String]) -> i32 {
+    #[cfg(feature = "vision")]
+    {
+        tessera_vision::anomaly::execute(args)
+    }
+    #[cfg(not(feature = "vision"))]
+    {
+        let _ = args;
+        eprintln!(
+            "ERROR: anomaly requires the vision feature: cargo build --release -p tessera_core --features vision"
+        );
+        4
+    }
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = std::env::args().skip(1).collect();
     match args.first().map(String::as_str) {
@@ -70,6 +85,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
         Some("pdfscan") => {
             let code = run_pdfscan(&args[1..]);
+            std::process::exit(code);
+        }
+        Some("anomaly") => {
+            let code = run_anomaly(&args[1..]);
             std::process::exit(code);
         }
         _ => tessera_core::orchestrator::run_pipeline(),

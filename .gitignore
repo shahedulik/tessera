@@ -11,3 +11,5 @@ tessera-stage/
 c_audit_full.txt
 audit_*.txt
 *.log
+
+models/

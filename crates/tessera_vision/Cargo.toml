@@ -1,12 +1,20 @@
 [package]
 name = "tessera_vision"
-version = "13.1.0"
+version = "13.2.0"
 edition = "2024"
 
 [features]
 default = []
 pdf = ["dep:pdfium-render", "dep:image"]
-model = ["dep:candle-core", "dep:dashmap", "dep:image", "dep:pdfium-render"]
+model = [
+    "dep:candle-core",
+    "dep:candle-nn",
+    "dep:candle-transformers",
+    "dep:tokenizers",
+    "dep:dashmap",
+    "dep:image",
+    "dep:pdfium-render",
+]
 
 [dependencies]
 sha2 = { workspace = true }
@@ -15,6 +23,10 @@ pdfium-render = { workspace = true, optional = true }
 image = { workspace = true, optional = true }
 dashmap = { workspace = true, optional = true }
 candle-core = { workspace = true, optional = true }
+candle-nn = { workspace = true, optional = true }
+candle-transformers = { workspace = true, optional = true }
+tokenizers = { workspace = true, optional = true }
 
 [dev-dependencies]
 proptest = { workspace = true }
+image = { workspace = true }
