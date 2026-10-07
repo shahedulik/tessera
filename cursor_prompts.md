@@ -35,7 +35,11 @@
 - Expected: `[VDU] Rasterized ... Shape: [1024, H, 3]`, cache round-trip PASS.
 - Gate: gauntlet PASS on a machine with the staged DLL.
 
-## P2-001 — LOCAL FORGE: INT4/AWQ-class quantized VLM (replaces AMD cloud path)
+## P2-001A — PDF Evidence Vein (EXECUTED + ACCEPTED in Lead Architect forge)
+- Outcome: crates/tessera_vision/src/pdf_vein.rs (+ engine.rs restructure, feature gates pdf/model) + tests/sqa_pdf_vein.rs + scripts/sqa_pdf.ps1. REAL PDF -> SHA-256 gate -> per-page text spans with bboxes (pdfium segments API, verified in 0.8.37 source) -> deterministic 200-DPI PNGs -> evidence_index.json + pages.jsonl + render_manifest.jsonl. CPU-only, no model, no GPU, no network. Sealed fixture: evidence/synthetic/tessera_fixture_1p.pdf (635 B, sha256 96bdc602f391621565cf76ed362cecd53326fa5ca520a4c52f3291bd6a578909). Acceptance: page_count=1, 612x792 pts -> 1700 px @200DPI, spans contain fixture text, bboxes finite and within page dims, byte-stable double-run, zero C: paths, typed errors for missing/corrupt/empty/root-violation, 2x10k proptest zero-panic.
+- Gate: scripts/sqa_pdf.ps1 -> SQA-PDF: PASS (7 of 7).
+
+## P2-001B — LOCAL FORGE: INT4/AWQ-class quantized VLM + vision anomaly engine (RESERVED — next after P2A acceptance)
 - Prompt: "Per .cursorrules LOCAL FORGE ONLY: add hf-hub to [workspace.dependencies]; download Qwen2-VL-2B-Instruct (weights are not evidence; HF_HOME=D:\tessera-cache\hf) and implement crates/tessera_vision quantize pipeline with candle: per-group INT4 symmetric quantization of linear layers (AWQ-class activation-aware scaling using a SYNTHETIC calibration set generated locally — never real evidence), KV-cache budget check against 2560MB, weights budget against 4608MB. Export to D:\tessera\models\qwen2vl2b_int4.safetensors + sha256 manifest + VRAM probe log from the RTX 5060 (cudarc allocation high-water mark). Ship with SQA (a)-(d): quantize/dequantize round-trip error bounds as property tests (10k random tensors), envelope invariants, zero panics."
 - Expected: artifact + manifest in D:\tessera\models; probe <= 4608MB weights.
 - Gate: gauntlet PASS + envelope probe within budget.

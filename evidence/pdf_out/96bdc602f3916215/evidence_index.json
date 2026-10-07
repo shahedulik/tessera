@@ -1,0 +1,13 @@
+{
+  "schema_version": "tessera.pdf_vein/1",
+  "tool": "TESSERA pdf_vein (P2A, CPU-only, deterministic)",
+  "source_pdf": {"path": "D:\\tessera\\evidence\\synthetic\\tessera_fixture_1p.pdf", "sha256": "96bdc602f391621565cf76ed362cecd53326fa5ca520a4c52f3291bd6a578909", "size_bytes": 635},
+  "output_dir": "D:\\tessera\\evidence\\pdf_out\\96bdc602f3916215",
+  "dpi": 200,
+  "page_count": 1,
+  "hash_definitions": {"page_sha256": "SHA-256 of raw RGBA pixels rendered at dpi", "image_sha256": "SHA-256 of encoded PNG file"},
+  "bbox_convention": "PDF points, normalized [x0,y0,x1,y1] from pdfium-render PdfRect",
+  "pages": [
+    {"page_no": 1, "png_file": "page_0001.png", "page_sha256": "eee8e4459cc1cb6bbd8963633518d61f21876577f90af3849fa2296e7ed02c71", "image_sha256": "389dbaa1e95756edf44b956beb0abca46f75715c08f8127926bb169e1a8c8cc6", "width_pts": 612.0000, "height_pts": 792.0000, "width_px": 1700, "height_px": 2200, "span_count": 2}
+  ]
+}

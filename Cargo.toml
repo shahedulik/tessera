@@ -4,6 +4,7 @@ resolver = "2"
 
 [workspace.dependencies]
 core_affinity = "0.8.1"
+tessera_vision = { path = "crates/tessera_vision" }
 tokio = { version = "1.36", features = ["full"] }
 arrow = { version = "58", features = ["prettyprint", "csv"] }
 libm = "0.2"

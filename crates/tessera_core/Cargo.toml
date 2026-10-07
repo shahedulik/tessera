@@ -6,6 +6,7 @@ edition = "2024"
 [features]
 default = []
 db = ["dep:duckdb", "dep:kuzu"]
+pdf = ["dep:tessera_vision", "tessera_vision/pdf"]
 
 [dependencies]
 core_affinity = { workspace = true }
@@ -16,6 +17,7 @@ sha2 = { workspace = true }
 hex = { workspace = true }
 duckdb = { workspace = true, optional = true }
 kuzu = { workspace = true, optional = true }
+tessera_vision = { workspace = true, optional = true }
 
 [dev-dependencies]
 proptest = { workspace = true }

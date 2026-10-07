@@ -3,10 +3,18 @@ name = "tessera_vision"
 version = "13.1.0"
 edition = "2024"
 
+[features]
+default = []
+pdf = ["dep:pdfium-render", "dep:image"]
+model = ["dep:candle-core", "dep:dashmap", "dep:image", "dep:pdfium-render"]
+
 [dependencies]
-candle-core = { workspace = true }
-pdfium-render = { workspace = true }
-image = { workspace = true }
-dashmap = { workspace = true }
 sha2 = { workspace = true }
 hex = { workspace = true }
+pdfium-render = { workspace = true, optional = true }
+image = { workspace = true, optional = true }
+dashmap = { workspace = true, optional = true }
+candle-core = { workspace = true, optional = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

@@ -160,3 +160,22 @@ GATE 6b: `SQA-DB: PASS (6 of 6). P1-002 + P1-003 accepted.` Expected rings outpu
 
 ## 8. CURSOR EXPIRY (2026-09-30)
 All prompts live in cursor_prompts.md; `.qwenrules` is the byte-identical mirror of `.cursorrules`. Post-expiry: Qwen Coder (free) opens the same repo, reads `.qwenrules`, executes the same register. Nothing depends on Cursor-specific state.
+
+## 9. PHASE 2A — PDF EVIDENCE VEIN (P2-001A, EXECUTED; regression runner below)
+Execution order on the Fortress:
+1. Place the Phase 2A patch files (see manifest delta) at their exact D:\tessera paths; re-run the §1 manifest gate (all entries PASS).
+2. `powershell -NoProfile -ExecutionPolicy Bypass -File D:\tessera\scripts\sqa_pdf.ps1` — routes TEMP/TMP to D:\tessera-cache\temp, then: fixture seal → clippy (vision, pdf, -D warnings) → cargo test (pdf suite, 2×10k fuzz) → release build (core, pdf) → `pdfscan --dry-run` → `pdfscan` full (default D: output root, no unsafe flag) → output-manifest hash validation + zero-C: audit.
+3. GATE: `SQA-PDF: PASS (7 of 7). P2A PDF Evidence Vein accepted.` and `$LASTEXITCODE` 0.
+4. Commit: `git add -A; git commit -m "P2-001A: PDF evidence vein (CPU-only, deterministic, SQA accepted)"`.
+
+CLI contract: `tessera_core.exe pdfscan <file.pdf> [--dry-run] [--dpi N] [--output-root PATH] [--allow-unsafe-output-root]`. Default output root `D:\tessera\evidence\pdf_out\<sha256-prefix16>\`. Exit codes: 0 PASS, 2 I/O-pdf-image error, 3 output-root violation (D:-law), 4 built without pdf feature.
+
+Phase 2A troubleshooting:
+| Symptom | First move |
+|---|---|
+| `pdfium bind failed` in tests but not in exe | DLL must sit beside exe AND test binaries (target\release\deps\) — both build.rs (core + vision) stage it; rerun build |
+| Encrypted PDF | Typed `pdfium error: open failed (corrupt or encrypted?)`, exit 2 — password support deliberately deferred (no silent skips) |
+| Corrupt/truncated PDF | Typed error exit 2; zero-page "repaired" docs → typed `EmptyDocument` — never a silent pass |
+| `OUTPUT ROOT VIOLATION` exit 3 | Working as designed: default law is D:-only; `--allow-unsafe-output-root` is for test harnesses only, never for evidence runs |
+| Non-reproducible PNG bytes | Check DPI argument identical (default 200); renderer is deterministic at fixed target_width_px — double-run test asserts byte stability |
+| `pdfscan` says feature required (exit 4) | Build with `cargo build --release -p tessera_core --features pdf` |

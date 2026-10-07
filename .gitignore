@@ -8,6 +8,6 @@
 builds/
 gauntlet_log.txt
 tessera-stage/
-*.log
 c_audit_full.txt
 audit_*.txt
+*.log
