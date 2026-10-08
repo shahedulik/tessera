@@ -2,15 +2,17 @@ param([string]$Dest = 'D:\tessera\models\moondream2')
 
 $ErrorActionPreference = 'Stop'
 
-$base = 'https://huggingface.co/vikhyatk/moondream2/resolve/main'
+$revision = 'f6e9da68e8f1b78b8f3ee10905d56826db7a5802'
+$base = "https://huggingface.co/vikhyatk/moondream1/resolve/$revision"
 $files = @(
-    [pscustomobject]@{ Name = 'model.safetensors';      Sha256 = '70a7d94c0c8349eb58ed2d9e636ef2d0916960f321ecabeac6354b8ba3d7403f'; Size = 3854538968 },
+    [pscustomobject]@{ Name = 'model.safetensors';      Sha256 = '892e51df302d98a83974761c4f386caddbad2edd0e84f228d9935b4aed33ee25'; Size = 3715037856 },
     [pscustomobject]@{ Name = 'tokenizer.json';         Sha256 = '337da36be7a71a6e88aa9148967a7bc8736f4b47c7de8e19ba92b89e80734cfc'; Size = 2114924 },
-    [pscustomobject]@{ Name = 'config.json';            Sha256 = 'c4d59ae1179c1792ad49b8aeb59092101cc948d7b1914ed549689aed2c1fa083'; Size = 277 },
-    [pscustomobject]@{ Name = 'generation_config.json'; Sha256 = 'a5a8484e27670c431bf1c5c9f972c27bdb8a3873ede65e2118440115b4c8d770'; Size = 69 }
+    [pscustomobject]@{ Name = 'config.json';            Sha256 = '426ecbf99e0a057f55f162ba97479bdd6b7ed1759c4f966db38cd5fe3255500b'; Size = 323 },
+    [pscustomobject]@{ Name = 'generation_config.json'; Sha256 = 'd8b3d56ccdc67e074c7923b07d778721d2d6212bacb344e97f9464fde1b7f29d'; Size = 69 }
 )
 
-Write-Host 'TESSERA // MODEL PROVISIONING // vikhyatk/moondream2 (weights are not evidence; D:-only, SHA-256 gated)'
+Write-Host 'TESSERA // MODEL PROVISIONING // Moondream2 1.86B f16 - REVISION-PINNED (DEV-38)'
+Write-Host ("Source: vikhyatk/moondream1 @ {0}" -f $revision)
 Write-Host ("Destination: {0}" -f $Dest)
 New-Item -ItemType Directory -Force -Path $Dest | Out-Null
 
