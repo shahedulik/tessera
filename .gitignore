@@ -13,3 +13,7 @@ audit_*.txt
 *.log
 
 models/
+
+*.bak
+
+*.local_backup.*
