@@ -17,19 +17,19 @@ fn resolve_evidence_path(args: &[String]) -> (PathBuf, bool) {
     )
 }
 
-fn run_db_command(args: &[String], rings: bool) -> i32 {
+fn run_db_command(args: &[String], rings: bool, collapse: bool) -> i32 {
     let (path, allow_unsealed) = resolve_evidence_path(args);
     #[cfg(feature = "db")]
     {
         if rings {
-            tessera_core::graph::execute(&path, allow_unsealed)
+            tessera_core::graph::execute(&path, allow_unsealed, collapse)
         } else {
             tessera_core::ingest::execute(&path, allow_unsealed)
         }
     }
     #[cfg(not(feature = "db"))]
     {
-        let _ = (&path, allow_unsealed, rings);
+        let _ = (&path, allow_unsealed, rings, collapse);
         eprintln!(
             "ERROR: this subcommand requires the db feature: cargo build --release -p tessera_core --features db"
         );
@@ -67,6 +67,42 @@ fn run_anomaly(args: &[String]) -> i32 {
     }
 }
 
+fn run_identity(args: &[String]) -> i32 {
+    let positional: Vec<String> = args
+        .iter()
+        .filter(|arg| {
+            !matches!(
+                arg.as_str(),
+                "--csv" | "--threshold" | "--allow-unsealed"
+            )
+        })
+        .cloned()
+        .collect();
+    let (path, allow_unsealed) = resolve_evidence_path(&positional);
+    let mut forwarded: Vec<String> = Vec::with_capacity(args.len() + 2);
+    forwarded.push("--csv".to_string());
+    forwarded.push(path.to_string_lossy().into_owned());
+    if allow_unsealed {
+        forwarded.push("--allow-unsealed".to_string());
+    }
+    let mut index = 0;
+    while index < args.len() {
+        if args[index] == "--threshold" {
+            forwarded.push(args[index].clone());
+            index += 1;
+            match args.get(index) {
+                Some(value) => forwarded.push(value.clone()),
+                None => {
+                    eprintln!("ERROR: --threshold requires a value in [0.0, 1.0]");
+                    return 2;
+                }
+            }
+        }
+        index += 1;
+    }
+    tessera_core::identity::execute(&forwarded)
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = std::env::args().skip(1).collect();
     match args.first().map(String::as_str) {
@@ -76,11 +112,16 @@ fn main() -> Result<(), Box<dyn Error>> {
             std::process::exit(code);
         }
         Some("ingest") => {
-            let code = run_db_command(&args[1..], false);
+            let code = run_db_command(&args[1..], false, false);
             std::process::exit(code);
         }
         Some("rings") => {
-            let code = run_db_command(&args[1..], true);
+            let collapse = !args[1..].iter().any(|arg| arg == "--no-collapse");
+            let code = run_db_command(&args[1..], true, collapse);
+            std::process::exit(code);
+        }
+        Some("identity") => {
+            let code = run_identity(&args[1..]);
             std::process::exit(code);
         }
         Some("pdfscan") => {

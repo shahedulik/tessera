@@ -1,4 +1,5 @@
 pub mod benford;
+pub mod identity;
 pub mod orchestrator;
 
 #[cfg(feature = "db")]

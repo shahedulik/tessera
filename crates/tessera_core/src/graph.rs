@@ -1,12 +1,14 @@
 use crate::benford::{parse_csv_bytes, sha256_hex, BenfordError, SEALED_FIXTURE_SHA256};
 use crate::ingest::{extract_rows, TenderRow};
 use kuzu::{Connection, Database, SystemConfig, Value};
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::fmt;
 use std::fs;
 use std::path::Path;
 
 pub const EXPECTED_RING_COUNT: usize = 3;
+pub const EXPECTED_RAW_COMPANY_COUNT: usize = 4960;
+pub const EXPECTED_SUPER_NODE_COUNT: usize = 4956;
 pub const RING_WINDOW_DAYS: i64 = 7;
 const STATEMENT_CHUNK: usize = 64;
 
@@ -68,6 +70,19 @@ impl From<crate::ingest::IngestError> for GraphError {
     fn from(e: crate::ingest::IngestError) -> Self {
         Self::Ingest(e)
     }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CollapsedCounts {
+    pub companies: usize,
+    pub raw_companies: usize,
+    pub super_nodes: usize,
+    pub persons: usize,
+    pub tenders: usize,
+    pub owned_by: usize,
+    pub bid_on: usize,
+    pub transferred_to: usize,
+    pub shares_address: usize,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -224,6 +239,129 @@ pub fn load_fixture(conn: &Connection, rows: &[TenderRow]) -> Result<GraphCounts
     })
 }
 
+/// P1-004 Super-Node loader. Identical to `load_fixture` except that every Company node key,
+/// every OWNED_BY source and every BID_ON source is mapped through `alias_map` first.
+///
+/// Two deliberate asymmetries, both evidence-preserving:
+///   * `TRANSFERRED_TO` endpoints are canonicalized on BOTH sides (the ring companies are not
+///     aliased on the sealed fixture, so RING-01/02/03 are provably byte-identical).
+///   * `SHARES_ADDRESS` is emitted from the RAW company names. Canonicalizing it would collapse
+///     each alias pair into a single node, shrinking every group to size 1 and destroying the
+///     very relation that seeded P1-004 (measured: 4 edges -> 0). SHARES_ADDRESS is therefore the
+///     preserved alias evidence, and it stays at 4.
+pub fn load_fixture_collapsed(
+    conn: &Connection,
+    rows: &[TenderRow],
+    alias_map: &HashMap<String, String>,
+) -> Result<CollapsedCounts, GraphError> {
+    for statement in SCHEMA_STATEMENTS {
+        conn.query(statement)?;
+    }
+
+    let mut raw_companies: BTreeSet<String> = BTreeSet::new();
+    for row in rows {
+        raw_companies.insert(row.company_name.clone());
+    }
+    let mut canonical_companies: BTreeSet<String> = BTreeSet::new();
+    for company in &raw_companies {
+        canonical_companies.insert(crate::identity::canonical_of(alias_map, company).to_string());
+    }
+
+    let mut persons: BTreeSet<String> = BTreeSet::new();
+    let mut owned_pairs: BTreeSet<(String, String)> = BTreeSet::new();
+    let mut address_groups: BTreeMap<(String, String), BTreeSet<String>> = BTreeMap::new();
+    let mut transfer_statements: Vec<String> = Vec::new();
+    let mut tender_statements: Vec<String> = Vec::with_capacity(rows.len());
+    let mut bid_statements: Vec<String> = Vec::with_capacity(rows.len());
+
+    for row in rows {
+        let canonical_company = crate::identity::canonical_of(alias_map, &row.company_name);
+        tender_statements.push(format!(
+            "CREATE (:Tender {{id:'{}', amount:{:.2}, date:'{}', district:'{}'}})",
+            cypher_escape(&row.transaction_id),
+            row.amount_usd,
+            cypher_escape(&row.date),
+            cypher_escape(&row.district)
+        ));
+        bid_statements.push(format!(
+            "MATCH (c:Company {{name:'{}'}}), (t:Tender {{id:'{}'}}) CREATE (c)-[:BID_ON]->(t)",
+            cypher_escape(canonical_company),
+            cypher_escape(&row.transaction_id)
+        ));
+        if raw_companies.contains(&row.owner_name) {
+            let canonical_owner = crate::identity::canonical_of(alias_map, &row.owner_name);
+            transfer_statements.push(format!(
+                "MATCH (a:Company {{name:'{}'}}), (b:Company {{name:'{}'}}) CREATE (a)-[:TRANSFERRED_TO {{amount:{:.2}, date:'{}', tx_id:'{}'}}]->(b)",
+                cypher_escape(canonical_company),
+                cypher_escape(canonical_owner),
+                row.amount_usd,
+                cypher_escape(&row.date),
+                cypher_escape(&row.transaction_id)
+            ));
+        } else {
+            persons.insert(row.owner_name.clone());
+            owned_pairs.insert((canonical_company.to_string(), row.owner_name.clone()));
+            address_groups
+                .entry((row.owner_name.clone(), row.district.clone()))
+                .or_default()
+                .insert(row.company_name.clone());
+        }
+    }
+
+    let company_statements: Vec<String> = canonical_companies
+        .iter()
+        .map(|name| format!("CREATE (:Company {{name:'{}'}})", cypher_escape(name)))
+        .collect();
+    let person_statements: Vec<String> = persons
+        .iter()
+        .map(|name| format!("CREATE (:Person {{name:'{}'}})", cypher_escape(name)))
+        .collect();
+    let owned_statements: Vec<String> = owned_pairs
+        .iter()
+        .map(|(company, person)| {
+            format!(
+                "MATCH (c:Company {{name:'{}'}}), (p:Person {{name:'{}'}}) CREATE (c)-[:OWNED_BY]->(p)",
+                cypher_escape(company),
+                cypher_escape(person)
+            )
+        })
+        .collect();
+    let mut shares_statements: Vec<String> = Vec::new();
+    for ((_, district), members) in &address_groups {
+        let members: Vec<&String> = members.iter().collect();
+        for (i, left) in members.iter().enumerate() {
+            for right in members.iter().skip(i + 1) {
+                shares_statements.push(format!(
+                    "MATCH (a:Company {{name:'{}'}}), (b:Company {{name:'{}'}}) CREATE (a)-[:SHARES_ADDRESS {{district:'{}'}}]->(b)",
+                    cypher_escape(left),
+                    cypher_escape(right),
+                    cypher_escape(district)
+                ));
+            }
+        }
+    }
+
+    run_chunked(conn, &company_statements)?;
+    run_chunked(conn, &person_statements)?;
+    run_chunked(conn, &tender_statements)?;
+    run_chunked(conn, &owned_statements)?;
+    run_chunked(conn, &bid_statements)?;
+    run_chunked(conn, &transfer_statements)?;
+    run_chunked(conn, &shares_statements)?;
+
+    Ok(CollapsedCounts {
+        companies: canonical_companies.len(),
+        raw_companies: raw_companies.len(),
+        super_nodes: canonical_companies.len(),
+        persons: persons.len(),
+        tenders: rows.len(),
+        owned_by: owned_pairs.len(),
+        bid_on: rows.len(),
+        transferred_to: transfer_statements.len(),
+        shares_address: shares_statements.len(),
+    })
+}
+
 pub fn detect_rings(conn: &Connection, rows: &[TenderRow]) -> Result<Vec<RingHit>, GraphError> {
     let tx_map: BTreeMap<&str, &TenderRow> =
         rows.iter().map(|row| (row.transaction_id.as_str(), row)).collect();
@@ -278,8 +416,13 @@ pub fn detect_rings(conn: &Connection, rows: &[TenderRow]) -> Result<Vec<RingHit
     Ok(rings)
 }
 
-pub fn execute(path: &Path, allow_unsealed: bool) -> i32 {
+pub fn execute(path: &Path, allow_unsealed: bool, collapse: bool) -> i32 {
     println!("TESSERA // P1-003 CIRCULAR FLOW GATE (Kuzu bipartite, prebuilt contract)");
+    if collapse {
+        println!("mode   = collapse (P1-004 Super-Node aliases applied before every Cypher query)");
+    } else {
+        println!("mode   = no-collapse (--no-collapse: pre-P1-004 behaviour, sealed regression path)");
+    }
     println!("file   = {}", path.display());
     let bytes = match fs::read(path) {
         Ok(bytes) => bytes,
@@ -312,6 +455,13 @@ pub fn execute(path: &Path, allow_unsealed: bool) -> i32 {
             return 2;
         }
     };
+    let alias_map: HashMap<String, String> = if collapse {
+        let identity_rows = crate::identity::from_ingest_rows(&rows);
+        let clusters = crate::identity::resolve_aliases(&identity_rows);
+        crate::identity::build_alias_map(&clusters)
+    } else {
+        HashMap::new()
+    };
     let database = match Database::in_memory(SystemConfig::default()) {
         Ok(database) => database,
         Err(e) => {
@@ -326,24 +476,52 @@ pub fn execute(path: &Path, allow_unsealed: bool) -> i32 {
             return 2;
         }
     };
-    let counts = match load_fixture(&conn, &rows) {
-        Ok(counts) => counts,
-        Err(e) => {
-            eprintln!("ERROR: graph load failed: {e}");
-            return 2;
-        }
-    };
-    println!("kuzu: schema OK | 4 node tables (Person/Company/BankAccount/Tender) + 4 rel tables (OWNED_BY/BID_ON/TRANSFERRED_TO/SHARES_ADDRESS)");
-    println!(
-        "loaded: companies={} persons={} tenders={} | OWNED_BY={} BID_ON={} TRANSFERRED_TO={} SHARES_ADDRESS={}",
-        counts.companies,
-        counts.persons,
-        counts.tenders,
-        counts.owned_by,
-        counts.bid_on,
-        counts.transferred_to,
-        counts.shares_address
-    );
+    if collapse {
+        let counts = match load_fixture_collapsed(&conn, &rows, &alias_map) {
+            Ok(counts) => counts,
+            Err(e) => {
+                eprintln!("ERROR: collapsed graph load failed: {e}");
+                return 2;
+            }
+        };
+        println!("kuzu: schema OK | 4 node tables (Person/Company/BankAccount/Tender) + 4 rel tables (OWNED_BY/BID_ON/TRANSFERRED_TO/SHARES_ADDRESS)");
+        println!(
+            "loaded: companies={} persons={} tenders={} | OWNED_BY={} BID_ON={} TRANSFERRED_TO={} SHARES_ADDRESS={}",
+            counts.companies,
+            counts.persons,
+            counts.tenders,
+            counts.owned_by,
+            counts.bid_on,
+            counts.transferred_to,
+            counts.shares_address
+        );
+        println!(
+            "SUPER-NODE | raw_companies={} super_nodes={} alias_map_entries={} collapsed={}",
+            counts.raw_companies,
+            counts.super_nodes,
+            alias_map.len(),
+            counts.raw_companies.saturating_sub(counts.super_nodes)
+        );
+    } else {
+        let counts = match load_fixture(&conn, &rows) {
+            Ok(counts) => counts,
+            Err(e) => {
+                eprintln!("ERROR: graph load failed: {e}");
+                return 2;
+            }
+        };
+        println!("kuzu: schema OK | 4 node tables (Person/Company/BankAccount/Tender) + 4 rel tables (OWNED_BY/BID_ON/TRANSFERRED_TO/SHARES_ADDRESS)");
+        println!(
+            "loaded: companies={} persons={} tenders={} | OWNED_BY={} BID_ON={} TRANSFERRED_TO={} SHARES_ADDRESS={}",
+            counts.companies,
+            counts.persons,
+            counts.tenders,
+            counts.owned_by,
+            counts.bid_on,
+            counts.transferred_to,
+            counts.shares_address
+        );
+    }
     let rings = match detect_rings(&conn, &rows) {
         Ok(rings) => rings,
         Err(e) => {
