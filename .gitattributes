@@ -1,1 +1,37 @@
+* text=auto eol=lf
+
+*.dll binary
+
+*.png binary
+
+*.jpg binary
+
+*.jpeg binary
+
+*.gif binary
+
+*.ico binary
+
+*.pdf binary
+
+*.zip binary
+
+*.gz binary
+
+*.tar binary
+
+*.safetensors binary
+
+*.bin binary
+
+*.ttf binary
+
+*.otf binary
+
+*.woff binary
+
+*.woff2 binary
+
 evidence/** -text
+
+evidence/synthetic/synthetic_tenders.csv -text
